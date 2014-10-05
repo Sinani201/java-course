@@ -1,0 +1,499 @@
+\documentclass{beamer}
+
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{inconsolata}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+
+\setbeamercolor{note title}{bg=white}
+\setbeamercolor{note page}{bg=white}
+\setbeamercolor{note date}{fg=white}
+\setbeamertemplate{note page}[compress]
+
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+
+\lstset{language=Java,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{greencomments},
+  keywordstyle=\color{bluekeywords},
+  stringstyle=\color{redstrings},
+  basicstyle=\ttfamily
+  }
+
+\lstdefinestyle{highlight}{
+  keywordstyle=\color{bluekeywords},
+  commentstyle=\color{greencomments},
+  basicstyle=\ttfamily,
+}
+\lstdefinestyle{base}{
+  language={Java},
+  basicstyle={\color{black!40}\ttfamily},
+  keywordstyle=\color{bluekeywords!40},
+  commentstyle=\color{greencomments!40},
+  stringstyle=\color{redstrings!40},
+  moredelim=**[is][\only<+>{\color{black}\lstset{style=highlight}}]{@}{@},
+}
+
+\lstdefinestyle{basenopause}{
+  language={Java},
+  basicstyle=\color{black},
+  keywordstyle=\color{red},
+  commentstyle=\color{green},
+}
+
+\title{Programming I: The Basics}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Types}
+In Java we deal with \textbf{data}. As you will learn, it is possible to create infinitely many types of data.
+\pause
+
+For now, we will discuss the primitive types. These are:
+\pause
+\begin{itemize}
+\item int - An integer (0, 60, -22)
+\pause
+\item double - A floating-point number. (0, -2.3, 66.111)
+\pause
+\item boolean - can be either true or false
+\end{itemize}
+\pause
+
+There are more primitives than this, but we won't be using them.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Variables}
+\textbf{Variables} hold a value. When you declare a variable, it has a \textbf{name} and \textbf{type}.
+\pause
+\note{As you go through this list of examples, ask people what the value of each variable is. This seems simple but it's very useful, mainly because it gets students used to how the presentation format works.
+
+Also, make sure to clarify that variable names to not have to be one character long.}
+\begin{lstlisting}[style=base]
+@int x = 5;@
+@int y = 3;@
+@int z = x + y;@
+@int a = y + z;@
+@boolean b = true;@
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Functions in math}
+\note{You can skip or move quickly through the beginning part of this slide if you think your students are already familiar with math functions. However, the "bonus challenge" at the end is useful, so make sure students understand it.}
+You have probably already seen what functions in math look like. One function might look something like:
+$$f(x)=3x+2$$
+
+\pause
+Quick quiz: what is $f(6)$?
+\pause
+$3\times6 + 2 = 20$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Practice functions in math}
+$f(x)=5-3x$
+
+What is $f(2)$?
+\pause
+
+What is $f(0)$?
+\pause
+
+What is $f(-4)$?
+\pause
+\newline
+\newline
+Bonus challenge
+
+$g(x)=5 \times f(x)$
+
+What is $g(2)$?
+\pause
+
+What is $g(0)$?
+\pause
+
+What is $g(-2)$?
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Functions in Java}
+\note{Each part of this code block should be explained as you go through it (except for "private," just tell them that it will be learned later). Ask students "what is the return type of this function," "what is the name of this function," etc.
+
+As usual, call on students to answer these. If you feel like there are not enough, you can add your own, either by modifying the slides or by just giving them out during the presentation.}
+This is what a Java function looks like:
+\begin{lstlisting}[style=base]
+@private@ @int mysteryFunction@@(int x)@ {
+    @return x * 2;@
+}
+\end{lstlisting}
+\pause
+\begin{itemize}
+\item mysteryFunction(4);
+\pause
+\item mysteryFunction(0);
+\pause
+\item mysteryFunction(-1);
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Expressions}
+You may understand the concept of an \textbf{expression} from your math class. In programming, expressions are much more broad.
+\pause
+
+All of the following are valid expressions.
+\note{Call on students and ask them what the type of each expression is. For the third and fourth bullets (0 and 4.0), get different opinions and ask students to explain why they think it's double/int. Then, of course, explain what the right answer is and why.}
+\begin{itemize}
+\item<3->9 + 1
+\item<4->8.3 - 10.2
+\item<5->0
+\item<6->4.0
+\item<7->false
+\end{itemize}
+\pause
+When something is an expression, that means we can assign it to a variable, or pass it into a function as an argument.
+\end{frame}
+
+\begin{frame}[fragile]
+When we evaluate a function, its result (often called \textbf{"return value"}) becomes an expression.
+\begin{lstlisting}
+private int addTwo(int n) {
+    return x + 2;
+}
+\end{lstlisting}
+\begin{lstlisting}[style=base]
+@int a = 5;@
+@int b = addTwo(3);@
+@int c = a + b;@
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Functions as Expressions}
+\begin{lstlisting}
+public int mysteryFunction(int x) {
+    return x + 10;
+}
+\end{lstlisting}
+\begin{lstlisting}[style=base]
+@int a = mysteryFunction(4);@
+@int b = a + 3;@
+@int c = mysteryFunction(b);@
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{More fun with functions}
+\begin{lstlisting}
+private double mysteryFunction(double x) {
+    double y = x / 2;
+    return x + y;
+}
+\end{lstlisting}
+\begin{lstlisting}[style=base]
+@boolean p = 3 < 2;@
+
+@double a = mysteryFunction(4.4);@
+@int b = 6;@
+@boolean c = a > b;@
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Functions with multiple arguments}
+\note{If students are having trouble with this function, make sure they understand how many parameters the function has, and what the names of the parameters are. Once they figure that out, they should be able to answer the bullet points easily.}
+Functions can have multiple arguments. This is what it looks like:
+\pause
+\begin{lstlisting}
+private int someFunction(int x, int y) {
+    return (x+2)*y;
+}
+\end{lstlisting}
+\begin{itemize}
+\pause
+\item someFunction(1,3)
+\pause
+\item someFunction(2,2)
+\pause
+\item someFunction(3,0)
+\pause
+\item someFunction(0,3)
+\end{itemize}
+\pause
+\begin{lstlisting}[style=base]
+@int a = someFunction(0,1);@
+@int b = someFunction(a,1);@
+@int c = someFunction(2,2) + b;@
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\note{Students should write this function as a group. At this point you should take the presentation out of full screen and have three things up:
+
+-the someFunction example from the last slide to use as a reference for what functions look like
+
+-the current problem spec
+
+-a text editor
+
+Now go through the following questions: what is the name of this function? How many parameters does the function have, and what are the parameter names/types? What is the return type of this function?
+Now call on people and ask them to fill in parts of the function. If they are stuck, tell them to refer back to the someFunction example.
+Depending on how many students you have, some people might remember the semicolon and sometimes no one will. If no one can figure out the semicolon (it hasn't been explained in any of the slides), just fill it in for them and explain what it does.}
+\frametitle{Example problem: write a function}
+The area of a circle of radius $r$ is approximately $3.14\times{r^2}$. Write a function called areaCircle that approximates the area of a circle given $r$.
+\pause
+(do this problem in a separate text editor before proceeding)
+\pause
+\begin{lstlisting}
+private double areaCircle(double r) {
+    return 3.14 * r * r;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\note{See notes on the previous slide.}
+\frametitle{Example Problem: multiple arguments}
+The area of a triangle with base $b$ and height $h$ is given by $\left(\frac{b\times{h}}{2}\right)$. Write a function called areaTriangle that calculates the area of a triangle given $b$ and $h$.
+\pause
+(do this problem in a separate text editor before proceeding)
+\pause
+\begin{lstlisting}
+private double areaTriangle(double b, double h) {
+    return b * h / 2;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\note{Even though it should be obvious, make sure students know what the values of these two booleans are.}
+\frametitle{Booleans}
+A \textbf{boolean} is a type of data that can be either \textbf{true} or \textbf{false}. They can be declared just like any other variable.
+
+\begin{lstlisting}
+boolean isWeekday = true;
+boolean isSnowing = false;
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\note{In the OR example, both operands are true. Make sure students still understand that only one has to be true. There will be future examples which test all the possibilities for OR statements.}
+\frametitle{Boolean Logic}
+Booleans can be compared against one another. If we want to know if two booleans are true, we use AND (represented by \&\&). If we have two booleans and one or both can be true, we use OR (represented by ||).
+
+\begin{lstlisting}[style=base]
+@boolean partyHard = true;
+boolean isAwesome = true;
+boolean isWeekend = false;@
+
+@boolean partyToday = partyHard && isWeekend;@
+@boolean isBallin = isAwesome || partyHard;@
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\note{Ask students what the value in the parentheses is first, then tell them to solve the whole problem.}
+\frametitle{More Boolean Logic}
+Just like math operators, which can be grouped into complex expressions (e.g. $\frac{\left(4+x\right)\times{3}}{y}$), we can group boolean comparisons to check for complex things.
+
+\pause
+In this example, we party today if we are in "party hard mode" and it is the weekend, However, if we are a senior, we can party any day regardless of weekend status, as long as we are still in party hard mode. This operation can be written like this:
+\pause
+\begin{lstlisting}
+boolean partyHard = true;
+boolean isWeekend = false;
+boolean isSenior = true;
+
+boolean partyToday =
+       partyHard && (isSenior || isWeekend);
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+\note{Explain to students that order matters for some of these, but not to fret too much, because if they get it wrong, the compiler will politely tell them why.
+
+Also, make sure students understand the distinction between == and =.}
+\frametitle{Numbers and Booleans}
+We can compare numbers to each other, and use that to create booleans. The comparison operators in Java are:
+\begin{itemize}
+\item<1->< less than
+\item<2->> greater than
+\item<3-><= less than or equal to
+\item<4->>= greater than or equal to
+\item<5->== equal
+\item<6->!= not equal
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\note{This slide will be the first time students see comments. Make sure they understand what they are.}
+\frametitle{Comparison Examples}
+boolean a = 6 > 4; \pause // a is true
+\pause
+
+boolean b = 10 < 12; \pause // b is true
+\pause
+
+boolean c = 14 !=14; \pause // c is false
+\pause
+
+boolean d = 13 >= 20; \pause // d is false
+\pause
+
+boolean e = c || d; \pause // e is false
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Boolean Negation}
+If we want to get the opposite of a boolean (go from true to false or false to true), we can use an exclamation point.
+
+\begin{lstlisting}[style=base]
+@boolean a = true;@
+@boolean b = !a@
+
+@boolean c = !(a && b)@
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\note{There aren't any practice problems here, but ask students what the type/name/paramters are for this function.}
+\frametitle{Functions and Booleans}
+Booleans are a type just like any other, which means we can use them in our functions.
+\pause
+\begin{lstlisting}
+private boolean greaterThanThree(int n) {
+    return n > 3;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Mystery Function}
+\begin{lstlisting}
+private boolean mystery(int x, boolean b) {
+    return x > 40 && (b || x < 60);
+}
+\end{lstlisting}
+\begin{itemize}
+\item<2->mystery(70, true);
+\item<3->mystery(30, false);
+\item<4->mystery(70, false);
+\item<5->mystery(45, false);
+\item<6->mystery(50, true);
+\item<7->mystery(25, true);
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\note{This one is slightly different from the last mystery function, because there is a negation. Make sure students notice the negation (this is NOT the same problem).}
+\frametitle{Mystery Function, part 2}
+\begin{lstlisting}
+private boolean mystery(int x, boolean b) {
+    return x > 40 && !(b || x < 60);
+}
+\end{lstlisting}
+\begin{itemize}
+\item<2->mystery(70, true);
+\item<3->mystery(30, false);
+\item<4->mystery(70, false);
+\item<5->mystery(45, false);
+\item<6->mystery(50, true);
+\item<7->mystery(25, true);
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\note{Once again, go through the same procedure for writing functions as a group.}
+\frametitle{Write a Function}
+We want to know if we should party today. Given two arguments, a boolean $isBallin$ and an integer $swagLevel$, the method partyToday should return true if our swag level is greater than $9000$ OR if we are $ballin$.
+\pause
+(do this problem in a separate text editor before proceeding)
+\pause
+\begin{lstlisting}
+private boolean partyToday(boolean isBallin, int swagLevel) {
+    return (swagLevel > 9000) || hardInThePaint;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{If Statements}
+Sometimes we want to branch program flow. \textbf{If statements} allow us to selectively execute code based on the value of a boolean.
+\pause
+
+In this example, we have written a function called sumDouble. Given two ints, return the sum of those two numbers, unless they are the same, in which case we should return double their sum.
+\pause
+\begin{lstlisting}
+private int sumDouble(int a, int b) {
+    if (a == b) {
+        return 2 * (a + b);
+    } else {
+        return a + b;
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Another If Statement Function}
+\begin{lstlisting}
+private int mystery(int a, int b, int c) {
+    if (a == b) {
+        return a + c;
+    } else {
+        return a + b + c;
+    }
+}
+\end{lstlisting}
+\begin{itemize}
+\item<2->mystery(3,4,4);
+\item<3->mystery(4,4,3);
+\item<4->mystery(1,2,3);
+\item<5->mystery(7,7,7);
+\item<6->mystery(4,5,4);
+\item<7->mystery(1,1,2);
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\note{Some of these are tough, so it might not be a good idea to make this homework. Assign it during class, and help students who need it.
+
+The "CodingBat page" mentioned can be found at codingbat.com/home/sinani201@gmail.com . There are three custom problems I have made that are much simpler and should be completed first.
+
+At this point you may have noticed that some students will pick up this material faster than others. These students should be encouraged to do more than four problems.}
+\frametitle{Assignment}
+Do 4 or more of any of the following exercises in Warmup-1, as well as the custom problems on the CodingBat page.
+\begin{itemize}
+\item sleepIn
+\item monkeyTrouble
+\item sumDobule
+\item parrotTrouble
+\item makes10
+\item posNeg
+\item icyHot
+\item in1020
+\item hasTeen
+\item loneTeen
+\item intMax
+\item in3050
+\item max1020
+\end{itemize}
+\end{frame}
+\end{document}
