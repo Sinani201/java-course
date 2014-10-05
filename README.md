@@ -11,6 +11,7 @@ This course is split up into lectures, which can be found in the `slides` direct
 When students give answers to questions, it is important to make sure they understand what they are saying. Teachers should challenge their students to provide justification or ask "are you sure," regardless of whether or not a student's answer is right or wrong.
 
 Whenever a new concept is introduced, students will go through the following process:
+
 1. Learning - reading about the concept
 2. Reading - seeing and interpreting how that concept works in actual code
 3. Group writing - the class, as a group, will write a snippet of code that utilizes the concept
@@ -27,6 +28,8 @@ All students should have accounts on codingbat.com. In addition to the exercises
 ### Slides
 Slides were created using LaTeX with Beamer. Since the slides are open-source, you are welcome to change them. Compiling a lecture file without any special options will generate a pdf that can be used as a presentation. To generate handout pdfs (versions of the slides that do not have steps or pauses) or notes files (pdfs with notes for teachers), you can use the supplied Makefile. Here are some examples of how to use the makefile:
 
+If you don't have LaTeX, pre-compiled versions of the slides will be provided sometime in the future.
+
 ```bash
 make all # Generate presentation slides, handouts, and notes for all lectures
 make slides # Only generate presentation slides for all lectures
@@ -38,7 +41,7 @@ make slides3 # Only generate the presentation slides for lecture 3
 make notes2 # Only generate presentation notes for lecture 2
 ```
 
-### Examples
+### Code Examples
 Coming soon!
 
 ## Collaboration and open-source spirit
