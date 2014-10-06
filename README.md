@@ -28,8 +28,6 @@ All students should have accounts on codingbat.com. In addition to the exercises
 ### Slides
 Slides were created using LaTeX with Beamer. Since the slides are open-source, you are welcome to change them. Compiling a lecture file without any special options will generate a pdf that can be used as a presentation. To generate handout pdfs (versions of the slides that do not have steps or pauses) or notes files (pdfs with notes for teachers), you can use the supplied Makefile. Here are some examples of how to use the makefile:
 
-If you don't have LaTeX, pre-compiled versions of the slides will be provided sometime in the future.
-
 ```bash
 make all # Generate presentation slides, handouts, and notes for all lectures
 make slides # Only generate presentation slides for all lectures
@@ -40,6 +38,8 @@ make handout1 # Only generate the handout pdf for lecture 1
 make slides3 # Only generate the presentation slides for lecture 3
 make notes2 # Only generate presentation notes for lecture 2
 ```
+
+If you don't have LaTeX, compiled slide PDFs can be downloaded from the "Releases" section of this repo.
 
 ### Code Examples
 Coming soon!
