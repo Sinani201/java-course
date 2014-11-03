@@ -1,0 +1,176 @@
+\documentclass{beamer}
+
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{inconsolata}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+
+\lstset{language=Java,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{greencomments},
+  keywordstyle=\color{bluekeywords},
+  stringstyle=\color{redstrings},
+  basicstyle=\ttfamily
+  }
+
+\lstdefinestyle{highlight}{
+  keywordstyle=\color{bluekeywords},
+  commentstyle=\color{greencomments},
+  basicstyle=\ttfamily,
+}
+
+\lstdefinestyle{allwhite}{
+  keywordstyle=\color{white},
+  commentstyle=\color{white},
+  basicstyle=\ttfamily,
+}
+
+\lstdefinestyle{base}{
+  language={Java},
+  basicstyle={\color{black!40}\ttfamily},
+  keywordstyle=\color{bluekeywords!40},
+  commentstyle=\color{greencomments!40},
+  stringstyle=\color{redstrings!40},
+  moredelim=**[is][\only<+>{\color{black}\lstset{style=highlight}}]{@}{@},
+}
+
+\lstdefinestyle{hiddencode}{
+  language={Java},
+  basicstyle={\color{black}\ttfamily},
+  keywordstyle=\color{bluekeywords},
+  commentstyle=\color{greencomments},
+  stringstyle=\color{redstrings},
+  moredelim=**[is][\only<+>{\color{white}\lstset{style=allwhite}}]{@}{@},
+}
+
+\lstdefinestyle{basenopause}{
+  language={Java},
+  basicstyle=\color{black},
+  keywordstyle=\color{red},
+  commentstyle=\color{green!60!black},
+}
+
+\title{Programming II: Attack of the Arrays}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}[fragile]
+\frametitle{Arrays}
+\note{Of course, explain to students what's going on here. Make sure they understand why c is invalid (it has a double in an int array). Also note that the fifth bullet point, b[3], returns an error.}
+Sometimes we want to store multiple values in one variable. This is called an array.
+\pause
+\medskip
+
+This is one way to declare an array:
+\begin{lstlisting}[style=base]
+@int[] a@ = @{4, 5, 10, 1}@;
+@double[] b = {4.4, 1.0, -2.1}@;
+
+@int[] c = {4, 0, -1, 3.3}@;
+\end{lstlisting}
+
+\begin{itemize}
+\item<6->a[0]
+\item<7->a[1]
+\item<8->b[1]
+\item<9->b[2]
+\item<10->b[3]
+\item<11->a.length
+\item<12->b.length
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Array Example}
+A function that returns the sum of the first and second elements of an int array:
+
+\begin{lstlisting}[style=basenopause]
+int sumFirstTwo(int[] nums) {
+    return nums[0] + nums[1];
+}
+\end{lstlisting}
+\begin{itemize}
+\item<2->sumFirstTwo(\{1, 2, 3, 4, 5\})
+\item<3->sumFirstTwo(\{0, 6, 3, 2\})
+\item<4->sumFirstTwo(\{-6, 6, 12, 3\})
+\item<5->sumFirstTwo(\{4\})
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Array Example 2}
+A function that returns the sum of the first and second elements of an int array, OR just the first element, if there is only one list entry.
+
+\begin{lstlisting}[style=basenopause]
+private int sumFirstOneOrTwo(int[] nums) {
+    if (nums.length >= 2) {
+        return nums[0] + nums[1];
+    } else {
+        return nums[0];
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Creating an array}
+Given an int array $nums$ of length 3, return a new array with the elements in reverse order, so {1, 2, 3} becomes {3, 2, 1}. (codingbat problem)
+\begin{lstlisting}[style=basenopause]
+private int[] reverse3(int[] nums) {
+    int[] a = new int[3];
+    
+    // what is a.length?
+    
+    a[0] = nums[2];
+    a[1] = nums[1];
+    a[2] = nums[0];
+    
+    return a;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Last element of an array}
+\note{For this slide, I recommend opening up a text editor and putting up a few arrays. Ask students what the length of each array is, then ask what the index of the last element is.}
+How can we get the last element of an array?
+
+\begin{lstlisting}[style=hiddencode]
+private int lastElement(int[] nums) {
+    // ?????
+    @return nums[nums.length - 1];@
+}
+\end{lstlisting}
+\pause
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Write a function: array edition}
+Given an int array $nums$, write a function $firstLastEqual$ that returns true if the first and last array elements are equal. (modified codingbat problem)
+\pause 
+(do this problem in a separate text editor before proceeding)
+\pause
+\begin{lstlisting}
+private boolean firstLastEqual(int[] nums) {
+    return nums[0] == nums[nums.length-1];
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+\frametitle{Assignment}
+Go to the Java Array-1 section of CodingBat. Do all of the problems you can handle.
+\end{frame}
+\end{document}
