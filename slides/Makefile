@@ -1,4 +1,4 @@
-LIST = 1 2
+LIST = 1 2 3
 
 define make-lecture-target
   full$1: slides$1 handout$1 notes$1

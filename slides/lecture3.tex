@@ -1,0 +1,363 @@
+\documentclass{beamer}
+
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{inconsolata}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+
+\lstset{language=Java,
+	showspaces=false,
+	showtabs=false,
+	breaklines=true,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	commentstyle=\color{greencomments},
+	keywordstyle=\color{bluekeywords},
+	stringstyle=\color{redstrings},
+	basicstyle=\ttfamily
+}
+
+\lstdefinestyle{highlight}{
+	keywordstyle=\color{bluekeywords},
+	commentstyle=\color{greencomments},
+	basicstyle=\ttfamily,
+}
+
+\lstdefinestyle{allwhite}{
+	keywordstyle=\color{white},
+	commentstyle=\color{white},
+	basicstyle=\ttfamily,
+}
+
+\lstdefinestyle{base}{
+	language={Java},
+	basicstyle={\color{black!40}\ttfamily},
+	keywordstyle=\color{bluekeywords!40},
+	commentstyle=\color{greencomments!40},
+	stringstyle=\color{redstrings!40},
+	moredelim=**[is][\only<+>{\color{black}\lstset{style=highlight}}]{@}{@},
+}
+
+\lstdefinestyle{hiddencode}{
+	language={Java},
+	basicstyle={\color{black}\ttfamily},
+	keywordstyle=\color{bluekeywords},
+	commentstyle=\color{greencomments},
+	stringstyle=\color{redstrings},
+	moredelim=**[is][\only<+>{\color{white}\lstset{style=allwhite}}]{@}{@},
+}
+
+\lstdefinestyle{basenopause}{
+	language={Java},
+	basicstyle=\color{black},
+	keywordstyle=\color{red},
+	commentstyle=\color{green!60!black},
+}
+
+\title{Programming III: Loops}
+\date{}
+
+\begin{document}
+	
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Loops}
+When writing a procedure, we may need to repeat something. We can use \textbf{loops} to accomplish this.
+\pause
+\medskip
+
+Say we are told to write a function that takes an int as a parameter and returns the sum of all subsequent integers.
+\note{There \textit{is} a formula for getting an integer summation without using loops-- $frac{n(n+1)}{2}$. But that misses the point of this exercise.}
+
+\begin{itemize}
+\item{intSum(3) $\rightarrow 3 + 2 + 1 = 6$}
+\item{intSum(5) $\rightarrow 5 + 4 + 3 + 2 + 1 = 15$}
+\end{itemize}
+
+How can we write this function?
+\end{frame}
+
+\begin{frame}[fragile]
+\note{One new thing we're doing in this function is changing the value of a variable (which hasn't been covered in past lessons). Make sure students understand that the value of n is changing. When we get to scope, they will learn that the value plugged into the function is not changing (pass by value).
+
+Step through this code closely. Make sure students understand exactly what's happening. It might help to get a whiteboard/text editor open.}
+\frametitle{A simple loop: while}
+\begin{lstlisting}[style=basenopause]
+private int intSum(int n) {
+    int sum = 0;
+    while (n > 0) {
+        sum = sum + n;
+        n = n - 1;
+    }
+    return sum;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Looping through arrays}
+Suppose we have an array, and we want to get the sum of all elements in that array. We do not know how many elements the array has.
+\begin{itemize}
+\item{sumArray(\{15, 3, 9\}) $\rightarrow 15 + 3 + 9 = 27$}
+\item{sumArray(\{8, 2, 3\}) $\rightarrow 8 + 2 + 3 = 13$}
+\end{itemize}
+\note{Here you should explain the ++ and += operators}
+\pause
+\begin{lstlisting}[style=basenopause]
+private int sumArray(int[] nums) {
+    int i = 0;
+    int sum = 0;
+    while (i < nums.length) {
+        sum += nums[i];
+        i++;
+    }
+    return sum;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Warning!}
+Try to figure out what is wrong with this code:
+\begin{lstlisting}[style=basenopause]
+private int sumArray(int[] nums) {
+    int i = 0;
+    int sum = 0;
+    while (i < nums.length) {
+        sum += nums[i];
+    }
+    return sum;
+}
+\end{lstlisting}
+\pause
+\textbf{We are never increasing i!} i will always be equal to 0, and will always be less than nums.length. This code will result in an \textbf{infinite loop}, which means it will run forever, or crash. Thus it is absolutely vital to make sure that whenever you are using loops, especially while loops, that the exit case will be met at some point.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Interpret this code}
+\begin{lstlisting}
+private int mystery(int[] nums) {
+    int i = 0;
+    int n = 0;
+    
+    while (i < nums.length) {
+        if (nums[i] > 10) {
+            n++;
+        }
+        i++;
+    }
+    
+    return n;
+}
+\end{lstlisting}
+
+\begin{itemize}
+\item<2-> mystery(\{12, 14, 9, 8, 10\})
+\item<3-> mystery(\{0, -12, 4, 33\})
+\item<4-> \textbf{What is the pattern here?}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Write a while loop function}
+Write a function called sumGreaterTen that takes an int array called nums and returns the sum of all its elements that are greater than 10.
+\pause 
+(do this problem in a separate text editor before proceeding)
+\pause
+\begin{lstlisting}
+private boolean sumGreaterTen(int[] nums) {
+    int i = 0;
+    int sum = 0;
+    while (i < nums.length) {
+        if (nums[i] > 10) {
+            sum += nums[i]
+        }
+        i++;
+    }
+    return sum;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Interpret this function 2}
+\begin{lstlisting}
+private double mystery(double[] nums) {
+    int i = 0;
+    double m = nums[0];
+    
+    while (i < nums.length) {
+        if (nums[i] > m) {
+            m = nums[i];
+        }
+        i++;
+    }
+    return m;
+}
+\end{lstlisting}
+\begin{itemize}
+\item<2-> mystery(\{15, 4, -19, 2\})
+\item<3-> mystery(\{5, 6, 7, 8, 9, 5\})
+\item<4-> \textbf{This function gets the largest element of the array!}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Write another function}
+Write a function called minValue that takes an int array called nums and returns the smallest element.
+\pause
+(do this problem in a separate text editor before proceeding)
+\pause
+\begin{lstlisting}
+private int minValue(int[] nums) {
+    int i = 0;
+    int min = nums[0];
+    while (i < nums.length) {
+        if (nums[i] < min) {
+            min = nums[i];
+        }
+        i++;
+    }
+    return min;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Interpret this function 3}
+\note{The last bullet point for this is 0, because it gets the first occurrence of the element}.
+\begin{lstlisting}
+private int mystery(int[] nums) {
+    int i = 0;
+    int min = nums[0];
+    int n;
+    while (i < nums.length) {
+        if (nums[i] > min) {
+            min = nums[i];
+            n = i;
+        }
+        i++;
+    }
+    return n;
+}
+\end{lstlisting}
+\begin{itemize}
+\item<2-> mystery(\{2, 4, -19, 3\})
+\item<3-> mystery(\{3, 6, 2, 0, 2, 3\})
+\item<4-> mystery(\{4, 4, 4, 4\})
+\item<5-> \textbf{This function gets the \textit{index} of the array's max element.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{for loops}
+\note{I would recommend having a text editor open with the old (while loop) version of this function to show how these are equivalent.}
+There is a very common pattern that is present in all of our past code:
+\begin{itemize}
+\item{We have an \textbf{initialization}, like int i = 0;}
+\item{We have an \textbf{loop condition}, like i < arr.length;}
+\item{We have an \textbf{update}, like i++}
+\end{itemize}
+\pause
+\begin{lstlisting}[style=basenopause]
+private int sumArray(int[] nums) {
+    int sum = 0;
+    for (int i = 0; i < nums.length; i++) {
+        sum += nums[i];
+    }
+    return sum;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\note{Explain what each of these three things mean. Then go back to the previous slide and show the examples of these in action.}
+\frametitle{for loop general syntax}
+\begin{lstlisting}[style=basenopause]
+for (initialization; condition; update) {
+    // stuff goes here
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Interpret this function 4}
+
+\begin{lstlisting}[style=basenopause]
+public boolean exists(int[] nums, int x) {
+    for (int i = 0; i < nums.length; i++) {
+        if (nums[i] == x) {
+            return true;
+        }
+    }
+    return false;
+}
+\end{lstlisting}
+
+\begin{itemize}
+\item<2-> exists(\{4,5,6,10\}, 8)
+\item<3-> exists(\{1, 2, 3, 4\}, 5)
+\item<4-> exists(\{4, 2, 3\}, 2)
+\item<5-> \textbf{Pattern: returns true if x is in the array}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Interpret this function 5}
+
+\note{This is really complex code, so take a lot of time to explain it. It might be useful to take some other Array-2 problems and show them the solutions for those. These are tough, especially for students who have just learned loops.}
+\begin{lstlisting}[style=basenopause]
+public boolean has22(int[] nums) {
+    boolean lastWas2 = false;
+    for (int i = 0; i < nums.length; i++) {
+        if (nums[i] == 2) {
+            if (lastWas2) {
+                return true;
+            }
+            lastWas2 = true;
+        } else {
+            lastWas2 = false;
+        }
+   }
+   return false;
+}
+\end{lstlisting}
+\begin{itemize}
+\item<2-> {has22(\{1, 2, 2\}) $\rightarrow$ true}
+\item<3-> {has22(\{1, 2, 1, 2\}) $\rightarrow$ false}
+\item<4-> \textbf{Return true if the array contains a 2 next to a 2.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Write yet another function!}
+\note{It might be helpful to have students plan out how this function will work before jumping right into the code writing part.}
+Write a function called hasTwoThrees that takes an int array called nums and returns true if the number 3 appears at least twice.
+\pause
+(do this problem in a separate text editor before proceeding)
+\pause
+\begin{lstlisting}
+private boolean hasTwoThrees(int[] nums) {
+    int i = 0;
+    int n = 0;
+    while (i < nums.length) {
+        if (nums[i] == 3) {
+            n++
+        }
+    }
+    return n >= 2;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+\frametitle{Assignment}
+Do CodingBat problems in Array-2. Some of them might require knowledge that you haven't been taught yet-- just skip those. Ask me if in doubt.
+\end{frame}
+\end{document}
