@@ -188,9 +188,9 @@ private boolean sumGreaterTen(int[] nums) {
 \begin{frame}[fragile]
 \frametitle{Interpret this function 2}
 \begin{lstlisting}
-private double mystery(double[] nums) {
+private int mystery(int[] nums) {
     int i = 0;
-    double m = nums[0];
+    int m = nums[0];
     
     while (i < nums.length) {
         if (nums[i] > m) {
@@ -203,7 +203,7 @@ private double mystery(double[] nums) {
 \end{lstlisting}
 \begin{itemize}
 \item<2-> mystery(\{15, 4, -19, 2\})
-\item<3-> mystery(\{5, 6, 7, 8, 9, 5\})
+\item<3-> mystery(\{5, 6, 8, 7, 9, 5\})
 \item<4-> \textbf{This function gets the largest element of the array!}
 \end{itemize}
 \end{frame}
@@ -236,9 +236,9 @@ private int minValue(int[] nums) {
 private int mystery(int[] nums) {
     int i = 0;
     int min = nums[0];
-    int n;
+    int n = 0;
     while (i < nums.length) {
-        if (nums[i] > min) {
+        if (nums[i] < min) {
             min = nums[i];
             n = i;
         }
@@ -329,8 +329,8 @@ public boolean has22(int[] nums) {
 }
 \end{lstlisting}
 \begin{itemize}
-\item<2-> {has22(\{1, 2, 2\}) $\rightarrow$ true}
-\item<3-> {has22(\{1, 2, 1, 2\}) $\rightarrow$ false}
+\item<2-> {has22(\{1, 2, 2\})}
+\item<3-> {has22(\{1, 2, 1, 2\})}
 \item<4-> \textbf{Return true if the array contains a 2 next to a 2.}
 \end{itemize}
 \end{frame}
@@ -344,14 +344,16 @@ Write a function called hasTwoThrees that takes an int array called nums and ret
 \pause
 \begin{lstlisting}
 private boolean hasTwoThrees(int[] nums) {
-    int i = 0;
-    int n = 0;
-    while (i < nums.length) {
+    boolean seen3 = false;
+    for (int i = 0; i < nums.length; i++) {
         if (nums[i] == 3) {
-            n++
+            if (seen3) {
+                return true;
+            }
+            seen3 = true;
         }
     }
-    return n >= 2;
+    return false;
 }
 \end{lstlisting}
 \end{frame}
