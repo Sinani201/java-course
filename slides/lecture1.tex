@@ -57,10 +57,7 @@
 
 \begin{frame}
 \frametitle{Types}
-In Java we deal with \textbf{data}. As you will learn, it is possible to create infinitely many types of data.
-\pause
-
-For now, we will discuss the primitive types. These are:
+The builtin types of Java:
 \pause
 \begin{itemize}
 \item int - An integer (0, 60, -22)
@@ -68,10 +65,11 @@ For now, we will discuss the primitive types. These are:
 \item double - A floating-point number. (0, -2.3, 66.111)
 \pause
 \item boolean - can be either true or false
-\end{itemize}
 \pause
-
-There are more primitives than this, but we won't be using them.
+\item char - a single character. ('q', 'P', '7')
+\pause
+\item String - a sequence of characters. ("PlanetBravo", "hello")
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -87,18 +85,21 @@ Also, make sure to clarify that variable names to not have to be one character l
 @int z = x + y;@
 @int a = y + z;@
 @boolean b = true;@
-\end{lstlisting}
+@String s = "Hello!";@
 
+@String name = Nisani;@
+@int n = "42";@
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}
 \frametitle{Functions in math}
 \note{You can skip or move quickly through the beginning part of this slide if you think your students are already familiar with math functions. However, the "bonus challenge" at the end is useful, so make sure students understand it.}
-You have probably already seen what functions in math look like. One function might look something like:
+This is a mathematical function:
 $$f(x)=3x+2$$
 
 \pause
-Quick quiz: what is $f(6)$?
+what is $f(6)$?
 \pause
 $3\times6 + 2 = 20$
 
@@ -106,7 +107,7 @@ $3\times6 + 2 = 20$
 
 \begin{frame}
 \frametitle{Practice functions in math}
-$f(x)=5-3x$
+$f(x)=5-x$
 
 What is $f(2)$?
 \pause
@@ -114,13 +115,13 @@ What is $f(2)$?
 What is $f(0)$?
 \pause
 
-What is $f(-4)$?
+What is $f(-1)$?
 \pause
 \newline
 \newline
 Bonus challenge
 
-$g(x)=5 \times f(x)$
+$g(x)=2 \times f(x)$
 
 What is $g(2)$?
 \pause
@@ -144,6 +145,15 @@ This is what a Java function looks like:
 \end{lstlisting}
 \pause
 \begin{itemize}
+\item Name of this function? \pause mysteryFunction
+\pause
+\item Parameters of this function? Names and types. \pause \newline One parameter: x, integer
+\pause
+\item Return type of this function? \pause \newline integer
+\end{itemize}
+\pause
+What is the return value of...
+\begin{itemize}
 \item mysteryFunction(4);
 \pause
 \item mysteryFunction(0);
@@ -152,49 +162,18 @@ This is what a Java function looks like:
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Expressions}
-You may understand the concept of an \textbf{expression} from your math class. In programming, expressions are much more broad.
-\pause
-
-All of the following are valid expressions.
-\note{Call on students and ask them what the type of each expression is. For the third and fourth bullets (0 and 4.0), get different opinions and ask students to explain why they think it's double/int. Then, of course, explain what the right answer is and why.}
-\begin{itemize}
-\item<3->9 + 1
-\item<4->8.3 - 10.2
-\item<5->0
-\item<6->4.0
-\item<7->false
-\end{itemize}
-\pause
-When something is an expression, that means we can assign it to a variable, or pass it into a function as an argument.
-\end{frame}
-
-\begin{frame}[fragile]
-When we evaluate a function, its result (often called \textbf{"return value"}) becomes an expression.
-\begin{lstlisting}
-private int addTwo(int n) {
-    return x + 2;
-}
-\end{lstlisting}
-\begin{lstlisting}[style=base]
-@int a = 5;@
-@int b = addTwo(3);@
-@int c = a + b;@
-\end{lstlisting}
-\end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Functions as Expressions}
 \begin{lstlisting}
-public int mysteryFunction(int x) {
+public int anotherFunction(int x) {
     return x + 10;
 }
 \end{lstlisting}
 \begin{lstlisting}[style=base]
-@int a = mysteryFunction(4);@
+@int a = anotherFunction(4);@
 @int b = a + 3;@
-@int c = mysteryFunction(b);@
+@int c = anotherFunction(b);@
 \end{lstlisting}
 
 \end{frame}
@@ -202,19 +181,17 @@ public int mysteryFunction(int x) {
 \begin{frame}[fragile]
 \frametitle{More fun with functions}
 \begin{lstlisting}
-private double mysteryFunction(double x) {
+private double biggerFunction(double x) {
     double y = x / 2;
     return x + y;
 }
 \end{lstlisting}
 \begin{lstlisting}[style=base]
-@boolean p = 3 < 2;@
 
-@double a = mysteryFunction(4.4);@
-@int b = 6;@
-@boolean c = a > b;@
+@double a = biggerFunction(4.4);@
 \end{lstlisting}
 \end{frame}
+
 
 \begin{frame}[fragile]
 \frametitle{Functions with multiple arguments}
@@ -226,6 +203,13 @@ private int someFunction(int x, int y) {
     return (x+2)*y;
 }
 \end{lstlisting}
+\pause
+\begin{itemize}
+\item Parameters of this function? Names and types. \pause \newline Two parameters: \pause an integer called x and an integer called y
+\pause
+\item Return type of this function? \pause \newline integer
+\end{itemize}
+\pause
 \begin{itemize}
 \pause
 \item someFunction(1,3)
@@ -256,8 +240,16 @@ private int someFunction(int x, int y) {
 Now go through the following questions: what is the name of this function? How many parameters does the function have, and what are the parameter names/types? What is the return type of this function?
 Now call on people and ask them to fill in parts of the function. If they are stuck, tell them to refer back to the someFunction example.
 Depending on how many students you have, some people might remember the semicolon and sometimes no one will. If no one can figure out the semicolon (it hasn't been explained in any of the slides), just fill it in for them and explain what it does.}
-\frametitle{Example problem: write a function}
+\frametitle{Example problem: write a function as a group}
 The area of a circle of radius $r$ is approximately $3.14\times{r^2}$. Write a function called areaCircle that approximates the area of a circle given $r$.
+\pause
+\begin{itemize}
+\item Name of this function? \pause areaCircle
+\pause
+\item Parameters of this function? Names and types. \pause \newline One parameter: a double called $r$.
+\pause
+\item Return type of this function? \pause \newline double
+\end{itemize}
 \pause
 (do this problem in a separate text editor before proceeding)
 \pause
@@ -271,16 +263,25 @@ private double areaCircle(double r) {
 \begin{frame}[fragile]
 \note{See notes on the previous slide.}
 \frametitle{Example Problem: multiple arguments}
-The area of a triangle with base $b$ and height $h$ is given by $\left(\frac{b\times{h}}{2}\right)$. Write a function called areaTriangle that calculates the area of a triangle given $b$ and $h$.
+The area of a triangle with base $b$ and height $h$ is given by $\frac{1}{2}\left(b\times{h}\right)$. Write a function called areaTriangle that calculates the area of a triangle given $b$ and $h$.
+\pause
+\begin{itemize}
+\item Name of this function? \pause areaTriangle
+\pause
+\item Parameters of this function? Names and types. \pause \newline Two parameters: an double called $b$ and an double called $h$.
+\pause
+\item Return type of this function? \pause \newline double
+\end{itemize}
 \pause
 (do this problem in a separate text editor before proceeding)
 \pause
 \begin{lstlisting}
-private double areaTriangle(double b, double h) {
+private double aTriangle(double b, double h) {
     return b * h / 2;
 }
 \end{lstlisting}
 \end{frame}
+
 
 \begin{frame}[fragile]
 \note{Even though it should be obvious, make sure students know what the values of these two booleans are.}
