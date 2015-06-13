@@ -2,11 +2,11 @@ LIST = 1 2 3
 
 define make-lecture-target
   full$1: slides$1 handout$1 notes$1
-  slides$1:
+  slides$1: lecture$1.tex
 	pdflatex -jobname=slides$1 -output-directory build lecture$1.tex
-  handout$1:
+  handout$1: lecture$1.tex
 	pdflatex -jobname=handout$1 -output-directory build '\PassOptionsToClass{handout}{beamer} \input{lecture$1}'
-  notes$1:
+  notes$1: lecture$1.tex
 	pdflatex -jobname=notes$1 -output-directory build '\PassOptionsToClass{handout,notes=only}{beamer} \input {lecture$1}'
 
   handouts:: handout$1
